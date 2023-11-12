@@ -1,0 +1,64 @@
+LEAGUE:
+  id: '012700009',
+  dfp: true,
+  access: 'private',
+  type: {
+    id: '8',
+    canBeDuplicated: false,
+    sponsorId: 2,
+    dspId: 'fec9e3fd-8f88-45ab-8cbd-b70b9d65dde0',
+    sponsor: 'LaLiga',
+    color: '#40464D',
+    textColor: '#ffffff',
+    front: '',
+    frontUrl: '',
+    description: '',
+    assets: {
+      billboard: 'https://assets-fantasy.llt-services.com/sponsors/fantasy/billboard_laliga.png',
+      billboard_sponsor: 'https://assets-fantasy.llt-services.com/sponsors/fantasy/billboard_relevo.png',
+      logo_list_item: 'https://assets-fantasy.llt-services.com/sponsors/fantasy/listitem_black_fantasy.png',
+      logo: 'https://assets-fantasy.llt-services.com/sponsors/fantasy/logo_fantasy_x2.png',
+      jersey: 'https://assets-fantasy.llt-services.com/sponsors/fantasy/jersey_fantasy.png',
+      jersey_full: 'https://assets-fantasy.llt-services.com/sponsors/fantasy/jersey_full_fantasy.png',
+      logo_white: 'https://assets-fantasy.llt-services.com/sponsors/fantasy/logo_white_fantasy_x2.png',
+      icon_app: 'https://assets-fantasy.llt-services.com/sponsors/fantasy/ic_fantasy.png',
+      icon_off: '',
+      banner: '',
+      banner_url: ''
+    }
+  },
+  managersNumber: 9,
+  name: 'Joju League',
+  region: { id: '4', global: true },
+  season: [],
+  config: {
+    features: { buyoutClause: true },
+    premiumFeatures: {
+      formations: false,
+      captain: false,
+      bench: false,
+      loan: false,
+      ideal: false,
+      coach: false
+    },
+    premiumConfigurations: { loan: [Object], ideal: [Object] }
+  },
+  isDuplicated: false,
+  isSecondRound: false,
+  token: 'hkbll8ql',
+  description: 'Juego limpio. 3,2,1 jornadas independientes. ',
+  premium: false,
+  team: {
+    id: 12796442,
+    money: 22369605,
+    teamPoints: 642,
+    playersNumber: 13,
+    banned: false,
+    teamValue: 206560994,
+    canPunctuate: false,
+    position: 2,
+    fixturePoints: 62,
+    previousPosition: 1,
+    isAdmin: false
+  }
+}
