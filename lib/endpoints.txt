@@ -1,6 +1,6 @@
 GENERAL:
 https://api-fantasy.llt-services.com/api/v3/leagues/012700009
-https://api-fantasy.llt-services.com/api/v3/leagues/012700009/teams/
+https://api-fantasy.llt-services.com/api/v3/leagues/012700009/teams
 https://api-fantasy.llt-services.com/api/v3/leagues/012700009/teams/{id-team}/
 
 JUGADORES Y HISTÓRICO DE VALOR DE MERCADO:
