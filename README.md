@@ -1,6 +1,6 @@
 NECESARIO:
-Lo único necesario es crear un archivo constant.js y colocarlo dentro de ./src
-Su contenido será:
+Lo único necesario es crear un archivo constant.js y colocarlo dentro de una carpeta lib que creemos en .
+El contenido de ese .js será:
     const token = ''
     module.exports = {
         token
