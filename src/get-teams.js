@@ -1,5 +1,5 @@
 const axios = require('axios');
-const {token} = require('./constants');
+const {token} = require('../lib/constants');
 const config = { headers: { Authorization: `Bearer ${token}`}};
 
 async function getTeams(idLeague){

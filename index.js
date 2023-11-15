@@ -1,7 +1,6 @@
 const { getLeague } = require('./src/get-league');
 const { getTeams } = require('./src/get-teams');
 const { showInfoTeam } = require('./src/show-info-team');
-const { getPlayerInfo } = require('./src/get-player-info');
 let league = {};
 let teams = [];
 
