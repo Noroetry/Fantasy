@@ -1,7 +1,6 @@
-const arg = process.argv[2] ?? '';
-
 const { getLeague } = require('./src/get-league');
 const { getTeams } = require('./src/get-teams');
+const { showInfoTeam } = require('./src/show-info-team');
 const { getPlayerInfo } = require('./src/get-player-info');
 let league = {};
 let teams = [];
@@ -10,41 +9,29 @@ async function fetchData(){
     try{
         league = await getLeague();
         teams = await getTeams(league.id)
-        switch (arg){
+        switch (process.argv[2]){
             case 'team':{
                 let teamIndex = teams.findIndex(t => t.id === league.team.id.toString());
-                let players = teams[teamIndex].players;
-                console.log('POS'.padEnd(3), '|', 'NAME'.padEnd(30), '|', 'PTS'.padEnd(3), '|', 'AVG'.padEnd(6), '|', 
-                            'VALUE'.padEnd(12), '|', 'TENDENCE'.padEnd(12), '|', 'CLAUSE UNBLOCK');
-                players.forEach(player => {
-                    pm = player.playerMaster
-                    console.log(pm.positionId.toString().padEnd(3), '|', pm.nickname.padEnd(30), '|', pm.points.toString().padStart(3), '|', 
-                                pm.averagePoints.toFixed(2).toString().padStart(6), '|', pm.marketValue.toString().padStart(12), '|', '+XXX.YYY'.padEnd(12));    
-                });
+                if (process.argv[3]) showInfoTeam(teams, teamIndex, process.argv[3]);
+                else showInfoTeam(teams, teamIndex);
             break;
             }
             case 'others':{
                 if (process.argv[3]){
-                    let teamIndex = teams.findIndex(t => t.manager.managerName === process.argv[3]);
-                    if (teamIndex > -1){
-                        let players = teams[teamIndex].players;
-                        console.log('POS'.padEnd(3), '|', 'NAME'.padEnd(30), '|', 'PTS'.padEnd(3), '|', 'AVG'.padEnd(6), '|', 
-                                    'VALUE'.padEnd(12), '|', 'TENDENCE'.padEnd(12), '|', 'CLAUSE UNBLOCK');
-                        players.forEach(player => {
-                            pm = player.playerMaster
-                            clauseBlock = new Date(player.buyoutClauseLockedEndTime).getTime();
-                            dateNow = new Date().getTime();
-                            diff = clauseBlock - dateNow;
-                            diff = Math.round(diff/(1000*60*60*24));
-                            console.log(pm.positionId.toString().padEnd(3), '|', pm.nickname.padEnd(30), '|', pm.points.toString().padStart(3), '|', 
-                                        pm.averagePoints.toFixed(2).toString().padStart(6), '|', pm.marketValue.toString().padStart(12), '|', '+XXX.YYY'.padEnd(12), '|',
-                                        ((diff==0)?'TODAY':'MORE 1 DAY').padEnd(10));    
-                        });
+                    if (process.argv[3] === 'all'){
+                      teams.forEach((t, index) => {
+                        if (process.argv[4]) showInfoTeam(teams, index, process.argv[4]);  
+                        else showInfoTeam(teams, index);
+                        return;
+                      })
                     }
+                    let teamIndex = teams.findIndex(t => t.manager.managerName === process.argv[3]);
+                    if (process.argv[4]) showInfoTeam(teams, teamIndex, process.argv[4]);  
+                    else showInfoTeam(teams, teamIndex);
                 }
                 else{
-                    console.log('Es necesario que como tercer parámetro se pase el nombre del jugador que quieres analizar.');
-                    teams.forEach(t => console.log(t.manager.managerName.toString().padStart(30)));
+                    console.log('Es necesario que como tercer parámetro se pase el nombre del jugador que quieres analizar o bien usa "all".\nUSERS:');
+                    teams.forEach(t => console.log(t.manager.managerName));
                 }
             break;
             }
