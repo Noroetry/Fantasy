@@ -20,14 +20,22 @@ async function fetchData(){
                 if (process.argv[3]){
                     if (process.argv[3] === 'all'){
                       teams.forEach((t, index) => {
-                        if (process.argv[4]) showInfoTeam(teams, index, process.argv[4]);  
-                        else showInfoTeam(teams, index);
+                        if (process.argv[4]) {
+                            showInfoTeam(teams, index, process.argv[4]); 
+                        }
+                        else {
+                            showInfoTeam(teams, index);
+                        }
                         return;
                       })
                     }
                     let teamIndex = teams.findIndex(t => t.manager.managerName === process.argv[3]);
-                    if (process.argv[4]) showInfoTeam(teams, teamIndex, process.argv[4]);  
-                    else showInfoTeam(teams, teamIndex);
+                    if (process.argv[4]){
+                        showInfoTeam(teams, teamIndex, process.argv[4]);  
+                    } 
+                    else {
+                        showInfoTeam(teams, teamIndex);
+                    }
                 }
                 else{
                     console.log('Es necesario que como tercer parámetro se pase el nombre del jugador que quieres analizar o bien usa "all".\nUSERS:');

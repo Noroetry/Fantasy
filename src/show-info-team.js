@@ -59,9 +59,6 @@ function showInfoTeam(teams, teamIndex, sort = 'pos'){
         });
         console.log('\ninfo -> Se puede ordenar las tablas poniendo como último parámetro la columna. (pos, pts, avg, market, clause, clause, unblock)')
     }
-    else {
-      console.log('No se encuentra el jugador.');
-    }
 }
 
 module.exports = {
