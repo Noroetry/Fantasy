@@ -24,6 +24,7 @@ function getPositionDef(id){
         case 2: return 'DEF';
         case 3: return 'CEN';  
         case 4: return 'DEL';
+        case 5: return 'ENT';
         default: return '¿?'
     }
 }
@@ -44,5 +45,6 @@ return team;
 }
 
 module.exports = {
-    getPlayersInfo
+    getPlayersInfo,
+    getPositionDef
 }

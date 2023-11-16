@@ -1,9 +1,12 @@
 const { getLeague } = require('./src/get-league');
 const { getTeams } = require('./src/get-teams');
+const { getMarket } = require('./src/get-market');
 const { showInfoTeam } = require('./src/show-info-team');
 const { getPlayersInfo } = require('./src/get-player-info');
+const { getMarketPlayerInfo } = require('./src/get-market-player-info');
+const { showInfoMarket } = require('./src/show-info-market');
 let league = {};
-let teams = [];
+let teams, market = [];
 
 async function fetchData(){
     try{
@@ -54,7 +57,14 @@ async function fetchData(){
             break;
             }
             case 'market':{
-                console.log('Market');
+                market = await getMarket(league.id)
+                market = await getMarketPlayerInfo(market);
+                if (process.argv[3]){
+                    await showInfoMarket(market, process.argv[3]);
+                } 
+                else {
+                    await showInfoMarket(market);
+                }
             break;
             }
             default:{

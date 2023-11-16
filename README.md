@@ -8,13 +8,13 @@ El contenido de ese .js será:
 Dónde el contenido de "token" será el token que obtenemos en la request "consent" al iniciar sesión en Fantasy.
 
 COMANDOS:
-npm run team [pos, pts, avg, market, clause, unblock]
-npm run others all [pos, pts, avg, market, clause, unblock]
-npm run others {user} [pos, pts, avg, market, clause, unblock]
+npm run team [pos, pts, avg, market, clause, tend, unblock]
+npm run others all [pos, pts, avg, market, clause, tend, unblock]
+npm run others {user} [pos, pts, avg, market, clause, tend, unblock]
+npm run market [pos, pts, avg, market, tend]
 
 MEJORAS:
 ! -> COLORES CONSOLA (picocolor)
-!!! -> Tabla con jugadores del mercado
 !! -> Jugadores más interesantes de los rivales con desbloqueo < 1 día
 !! -> Advertencias de vulnerabilidades
         - Jugadores con claúsulas sin subir
