@@ -1,6 +1,7 @@
 const { getLeague } = require('./src/get-league');
 const { getTeams } = require('./src/get-teams');
 const { showInfoTeam } = require('./src/show-info-team');
+const { getPlayersInfo } = require('./src/get-player-info');
 let league = {};
 let teams = [];
 
@@ -11,30 +12,39 @@ async function fetchData(){
         switch (process.argv[2]){
             case 'team':{
                 let teamIndex = teams.findIndex(t => t.id === league.team.id.toString());
-                if (process.argv[3]) showInfoTeam(teams, teamIndex, process.argv[3]);
-                else showInfoTeam(teams, teamIndex);
+                if (process.argv[3]) {
+                    teams[teamIndex] = await getPlayersInfo(teams[teamIndex]);
+                    showInfoTeam(teams[teamIndex], process.argv[3]);
+                }
+                else {
+                    teams[teamIndex] = await getPlayersInfo(teams[teamIndex]);
+                    showInfoTeam(teams[teamIndex]);
+                }
             break;
             }
             case 'others':{
                 if (process.argv[3]){
                     if (process.argv[3] === 'all'){
-                        let index = 0
                         for (t of teams) {
                             if (process.argv[4]) {
-                                await showInfoTeam(teams, index++, process.argv[4]);
+                                t = await getPlayersInfo(t);
+                                await showInfoTeam(t, process.argv[4]);
                             }
                             else {
-                                await showInfoTeam(teams, index++);
+                                t = await getPlayersInfo(t);
+                                await showInfoTeam(t);
                             }
                         }
                         return;
                     }
                     let teamIndex = teams.findIndex(t => t.manager.managerName === process.argv[3]);
                     if (process.argv[4]){
-                        showInfoTeam(teams, teamIndex, process.argv[4]);  
+                        t = await getPlayersInfo(teams[teamIndex]);
+                        await showInfoTeam(teams[teamIndex], process.argv[4]);
                     } 
                     else {
-                        showInfoTeam(teams, teamIndex);
+                        t = await getPlayersInfo(teams[teamIndex]);
+                        await showInfoTeam(teams[teamIndex]);
                     }
                 }
                 else{
