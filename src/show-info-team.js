@@ -1,4 +1,5 @@
 const moment = require('moment-timezone');
+const { getPLayerTendence } = require('./get-player-tendence');
 
 function getClauseInfo(clauseBlock){
     const now = moment();
@@ -38,7 +39,26 @@ function getSortedPlayers(players, sort){
     }
 }
 
-function showInfoTeam(teams, teamIndex, sort = 'pos'){
+async function getPlayerInfo(player){
+    pm = player.playerMaster
+    let clause, positionText;
+    let tendence;
+    try{
+        tendence = await getPLayerTendence(pm);
+        clause = getClauseInfo(player.buyoutClauseLockedEndTime)
+        positionText = getPositionDef(pm.positionId);
+        
+        console.log(positionText.toString().padEnd(3), '|', pm.nickname.padEnd(20), '|', pm.points.toString().padStart(3), '|', 
+                pm.averagePoints.toFixed(2).toString().padStart(6), '|', pm.marketValue.toLocaleString().padStart(12), '|', 
+                player.buyoutClause.toLocaleString().padStart(12), '|', tendence.toLocaleString().padStart(10), '|', ((clause.open)?'OPEN'.padStart(8):clause.text));
+    } 
+    catch (err) {
+        console.log(err);
+        process.exit(1);
+    }
+}
+
+async function showInfoTeam(teams, teamIndex, sort = 'pos'){
     let players;
     if (teamIndex > -1){
         players = teams[teamIndex].players;
@@ -49,14 +69,11 @@ function showInfoTeam(teams, teamIndex, sort = 'pos'){
                     'CLAUSE UNBLOCK'.padEnd(30)
                     );
         console.log("-".repeat(140));
-        getSortedPlayers(players, sort).forEach(player => {
-            pm = player.playerMaster
-            clause = getClauseInfo(player.buyoutClauseLockedEndTime)
-            positionText = getPositionDef(pm.positionId);
-            console.log(positionText.toString().padEnd(3), '|', pm.nickname.padEnd(20), '|', pm.points.toString().padStart(3), '|', 
-                        pm.averagePoints.toFixed(2).toString().padStart(6), '|', pm.marketValue.toLocaleString().padStart(12), '|', 
-                        player.buyoutClause.toLocaleString().padStart(12), '|', '+XXX.YYY'.padEnd(10), '|', ((clause.open)?'OPEN'.padStart(8):clause.text));
-        });
+        players = getSortedPlayers(players, sort)
+
+        for (player of players){
+            await getPlayerInfo(player);
+        };
         console.log('\ninfo -> Se puede ordenar las tablas poniendo como último parámetro la columna. (pos, pts, avg, market, clause, clause, unblock)')
     }
 }

@@ -18,15 +18,16 @@ async function fetchData(){
             case 'others':{
                 if (process.argv[3]){
                     if (process.argv[3] === 'all'){
-                      teams.forEach((t, index) => {
-                        if (process.argv[4]) {
-                            showInfoTeam(teams, index, process.argv[4]); 
-                        }
-                        else {
-                            showInfoTeam(teams, index);
+                        let index = 0
+                        for (t of teams) {
+                            if (process.argv[4]) {
+                                await showInfoTeam(teams, index++, process.argv[4]);
+                            }
+                            else {
+                                await showInfoTeam(teams, index++);
+                            }
                         }
                         return;
-                      })
                     }
                     let teamIndex = teams.findIndex(t => t.manager.managerName === process.argv[3]);
                     if (process.argv[4]){
