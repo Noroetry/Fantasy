@@ -14,9 +14,8 @@ npm run others {user} [pos, pts, avg, market, clause, tend, unblock]
 npm run market [pos, pts, avg, market, tend]
 
 MEJORAS:
-! -> COLORES CONSOLA (picocolor)
 !! -> Jugadores más interesantes de los rivales con desbloqueo < 1 día
-!! -> Advertencias de vulnerabilidades
+!! -> Advertencias de vulnerabilidades COLORES CONSOLA (picocolor)
         - Jugadores con claúsulas sin subir
         - Desbloqueos pronto
         - Posibles clausulazos que te dejan sin posible alineación
