@@ -11,7 +11,7 @@ function getSortedPlayers(players, sort){
 async function showInfoMarket(market, sort = 'pos'){
     console.log("-".repeat(140));
     console.log('POS'.padEnd(3), '|', 'NAME'.padEnd(20), '|', 'PTS'.padEnd(3), '|', 'AVG'.padEnd(6), '|', 
-                'SALE PRICE'.padEnd(12), '|', 'TENDENCE'.padEnd(10)
+                'SALE PRICE'.padEnd(12), '|', 'TENDENCE'.padEnd(10), '|', 'STATUS'.padEnd(10),
                 );
     console.log("-".repeat(140)); 
     market = getSortedPlayers(market, sort);
@@ -19,9 +19,8 @@ async function showInfoMarket(market, sort = 'pos'){
         let pm = player.playerMaster;
         console.log(player.positionText.toString().padEnd(3), '|', pm.nickname.padEnd(20), '|', pm.points.toString().padStart(3), '|', 
                 pm.averagePoints.toFixed(2).toString().padStart(6), '|', pm.marketValue.toLocaleString().padStart(12), '|', 
-                player.tendence.toLocaleString().padStart(10));
+                player.tendence.toLocaleString().padStart(10), '|', pm.playerStatus.toLocaleString().padStart(8));
     }
-    console.log('\ninfo -> Se puede ordenar las tablas poniendo como último parámetro la columna. (pos, pts, avg, market, tend)');
     console.log("-".repeat(140));
 }
 

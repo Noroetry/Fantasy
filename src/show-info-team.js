@@ -13,9 +13,9 @@ function getSortedPlayers(players, sort){
 async function showInfoTeam(team, sort = 'pos'){
     console.log("-".repeat(140));
     console.log(`Mánager: ${team.manager.managerName}\tTeam Value: $${team.teamValue.toLocaleString()}\t Tendence Global Value: $${team.players.reduce((cont, player) => cont + player.tendence, 0).toLocaleString()}`);
-    console.log('POS'.padEnd(3), '|', 'NAME'.padEnd(20), '|', 'PTS'.padEnd(3), '|', 'AVG'.padEnd(6), '|', 
+    console.log('\nPOS'.padEnd(3), '|', 'NAME'.padEnd(20), '|', 'PTS'.padEnd(3), '|', 'AVG'.padEnd(6), '|', 
                 'MARKET VALUE'.padEnd(12), '|', 'CLAUSE PRIZE'.padEnd(12), '|', 'TENDENCE'.padEnd(10), '|', 
-                'CLAUSE UNBLOCK'.padEnd(30)
+                'STATUS'.padEnd(10), '|','CLAUSE UNBLOCK'.padEnd(30)
                 );
     console.log("-".repeat(140)); 
     team.players = getSortedPlayers(team.players, sort);
@@ -23,9 +23,9 @@ async function showInfoTeam(team, sort = 'pos'){
         let pm = player.playerMaster;
         console.log(player.positionText.toString().padEnd(3), '|', pm.nickname.padEnd(20), '|', pm.points.toString().padStart(3), '|', 
                 pm.averagePoints.toFixed(2).toString().padStart(6), '|', pm.marketValue.toLocaleString().padStart(12), '|', 
-                player.buyoutClause.toLocaleString().padStart(12), '|', player.tendence.toLocaleString().padStart(10), '|', ((player.clause.open)?'OPEN'.padStart(8):player.clause.text));
+                player.buyoutClause.toLocaleString().padStart(12), '|', player.tendence.toLocaleString().padStart(10), '|',
+                pm.playerStatus.toLocaleString().padStart(8), '|', ((player.clause.open)?'OPEN'.padStart(8):player.clause.text));
     }
-    console.log('\ninfo -> Se puede ordenar las tablas poniendo como último parámetro la columna. (pos, pts, avg, market, clause, tend, unblock)');
     console.log("-".repeat(140));
 }
 
